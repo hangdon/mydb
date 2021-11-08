@@ -1,0 +1,29 @@
+<h1>{{ title }}</h1>
+
+<table>
+<tr>
+<td>Fid</td>
+<td>Fname</td>
+<td>price</td>
+</tr>
+{{#each Menu}}
+<form method="post">
+<tr>
+<td>{{Fid}}</td>
+<td>{{Fname}}</td>
+<td>{{price}}</td>
+<td style="border: none; margin-left: 10px;">
+<button 
+style="margin-left: 10px;" 
+name='delBtn' 
+type="submit" 
+value="{{price}}" 
+formaction="/delete"
+>
+삭제
+</button>
+</td>
+</tr> 
+</form>
+{{/each}}
+</table>
