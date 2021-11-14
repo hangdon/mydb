@@ -52,6 +52,25 @@ mysql과 연동하면 다음과 같은 student테이블이 나오게됩니다.
 1. mysql에서 week8폴더에 employee와 department라는 테이블을 생성한다.
 
 2. vs 코드에서 routes 폴더 내부의 home.js , select.js , update.js 그리고 delete.js 파일을 작성한다. 
+
+    >update.js 파일도 employee부분을 다음과 같이 수정해주었습니다.
+
+    <pre>
+    <code>
+    router.post('/employee', async (req,res) => {
+    const vars = req.body;
+    console.log(vars.salary);
+
+    const data = {
+        Salary: vars.salary
+    }
+
+    await updateSql.updateEmployee(data);
+
+    res.redirect('/select'); //localhost:3000/select -> 바꾼 값이 반영이 됬는지 바로 확인이 가능하다.
+}); //post는 데이터를 받아서 처리할 때,
+    </pre>
+    </code>
   
 3. database폴더 내부의 sql.js 파일에서 update부분을 다음과 같이 수정해주었습니다. 
    >조건을 Minit이 B인 사람만 salary수정이 가능하게 바꾼다.
@@ -66,6 +85,16 @@ export const updateSql = {
     </pre>
 
 4. 나머지 src와 views 파일 안의 index.js 와 hbs 파일도 작성해줍니다. 
+   > Employeeupdate.hbs 파일의 수정부분
+   <pre>
+   <code>
+     <td><input type="text" name="salary" placeholder={{Salary}}></td>
+        <td>{{Super_ssn}}</td>
+        <td>{{Dno}}</td>
+        <td><input type="submit" value="수정" formaction="/update/employee"></td>
+
+    </code>
+    </pre>
 
 5. power shell로 npm run start하고 웹 페이지로 결과를 확인합니다. 
 
@@ -73,7 +102,7 @@ employee와 department 테이블에 각각 insert하고 delete하고 결과를 �
 
 ## <span style="color:red"> 10주차 실습
 
-10주차에서는 week10이라는 데이터베이스 안에 user와 department 테이블을 만들어서 8주차에서 했던 것과 비슷하게 이번에는 update페이지가 아닌 delete페이지에서 조건을 주어 삭제한 후 select페이지에서 결과를 확인할 수 있게 하는 실습을 진행하였습니다. 
+10주차에서는 week10이라는 데이터베이스 안에 임의로 음식메뉴 테이블을 만들어서 8주차에서 했던 것과 비슷하게 이번에는 update페이지가 아닌 delete페이지에서 조건을 주어 삭제한 후 select페이지에서 결과를 확인할 수 있게 하는 실습을 진행하였습니다. 
 
 이번 실습에서 수정해준 sql.js의 코드는 다음과 같이 작성해주었습니다. 
 
@@ -92,6 +121,33 @@ export const deleteSql = {
 </pre>
 
 > delete 페이지에서 삭제버튼을 누르면 price가 10000원보다 클 때만 삭제가 되게끔 코드를 작성해주었습니다. 
+
+delete.js
+
+<pre>
+<code>
+router.post('/',async (req,res) => {
+    console.log('delete router:',req.body.delBtn);
+    const data = {
+        price: req.body.delBtn,
+    } //data를 버튼으로부터받은 price
+
+    await deleteSql.deleteMenu(data); //그리고 그 data를 deleteMenu의 함수에 넣는다. 함수 실행
+
+    res.redirect('/delete'); 
+</pre>
+</code>
+
+Fid|Fname|pride
+---|---|---|
+1|pizza|15000
+2|spaghetti|20000
+3|waffle|3000
+4|cake|9000
+5|salad|11000
+
+
+
 
 
 
