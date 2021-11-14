@@ -85,16 +85,6 @@ export const updateSql = {
     </pre>
 
 4. 나머지 src와 views 파일 안의 index.js 와 hbs 파일도 작성해줍니다. 
-   > Employeeupdate.hbs 파일의 수정부분
-   <pre>
-   <code>
-     <td><input type="text" name="salary" placeholder={{Salary}}></td>
-        <td>{{Super_ssn}}</td>
-        <td>{{Dno}}</td>
-        <td><input type="submit" value="수정" formaction="/update/employee"></td>
-
-    </code>
-    </pre>
 
 5. power shell로 npm run start하고 웹 페이지로 결과를 확인합니다. 
 
